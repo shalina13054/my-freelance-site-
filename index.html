@@ -226,6 +226,28 @@
             </div>
         </div>
     </section>
-
+    <script>
+      // Find your embedded form iframe
+      var iframe = document.querySelector('.form-wrapper iframe');
+      if (iframe) {
+        var isFirstLoad = true;
+        iframe.addEventListener('load', function() {
+          // The first load happens when the page opens. 
+          // The SECOND load only happens when they submit the form and the iframe refreshes!
+          if (!isFirstLoad) {
+             console.log("Form submitted successfully!");
+             
+             // OPTIONAL: If you want to force the parent window to change to your thank you page:
+             // window.location.href = "thank-you.html";
+             
+             // OR push an event to Google Tag Manager's dataLayer:
+             window.dataLayer = window.dataLayer || [];
+             window.dataLayer.push({ 'event': 'googleFormSubmitted' });
+          }
+          isFirstLoad = false;
+        });
+      }
+    </script>
 </body>
 </html>
+

@@ -144,10 +144,11 @@ nav a {
 
 .form-wrapper {
     background: white;
-    max-width: 650px;
+    width: 100%;
+    max-width: 750px; /* Gives the form plenty of room to breathe */
     margin: 0 auto;
-    padding: 30px;
+    padding: 10px;    /* Reduced from 30px to stop squishing the iframe */
     border-radius: 12px;
     border: 1px solid #e2e8f0;
-    min-height: 450px;
+    overflow: hidden; /* Prevents ugly double scrollbars */
 }

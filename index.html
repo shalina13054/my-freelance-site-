@@ -6,7 +6,6 @@
     <title>Expert GA4 & Google Ads Implementation</title>
     
     <style>
-        /* Modern Reset and Layout Design */
         * {
             margin: 0;
             padding: 0;
@@ -26,7 +25,6 @@
             padding: 0 20px;
         }
 
-        /* Top Navigation Header */
         header {
             background: #ffffff;
             padding: 20px 0;
@@ -66,7 +64,6 @@
             border-radius: 6px;
         }
 
-        /* Attention-Grabbing Hero Banner */
         .hero {
             background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
             color: white;
@@ -95,14 +92,8 @@
             padding: 12px 28px;
             border-radius: 6px;
             font-weight: 600;
-            transition: background 0.2s;
         }
 
-        .btn-primary:hover {
-            background: #4338ca;
-        }
-
-        /* Freelance Solutions Section */
         .services {
             padding: 80px 0;
             text-align: center;
@@ -111,7 +102,6 @@
         .services h3 {
             font-size: 32px;
             margin-bottom: 40px;
-            color: #0f172a;
         }
 
         .service-grid {
@@ -135,7 +125,6 @@
             color: #4f46e5;
         }
 
-        /* Inquiry Form Wrapper with Explicit Width Overrides */
         .contact {
             background: #f1f5f9;
             padding: 80px 0;
@@ -145,7 +134,6 @@
         .contact h3 {
             font-size: 32px;
             margin-bottom: 10px;
-            color: #0f172a;
         }
 
         .contact p {
@@ -153,31 +141,65 @@
             color: #475569;
         }
 
-        /* The structural card wrapping your form */
+        /* Form Card Styling */
         .form-wrapper {
             background: white;
             width: 100%;
-            max-width: 680px; /* Perfectly bounds Google Form's native sheet size */
+            max-width: 550px;
             margin: 0 auto;
-            padding: 0;       /* Complete zero-out to allow form edge alignment */
+            padding: 40px 30px;
             border-radius: 12px;
             border: 1px solid #e2e8f0;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
-            overflow: hidden;
+            text-align: left;
         }
 
-        /* Aggressive CSS rule forcing the iframe layout to expand */
-        .form-wrapper iframe {
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
             display: block;
-            width: 100% !important;
-            min-width: 100% !important;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1e293b;
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 16px;
+            color: #334155;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #4f46e5;
+            color: white;
             border: none;
+            padding: 14px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .submit-btn:hover {
+            background: #4338ca;
         }
     </style>
 </head>
 <body>
 
-    <!-- Header Navigation -->
     <header>
         <div class="container">
             <h1 class="logo">Analytics<span>Pro</span></h1>
@@ -188,7 +210,6 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h2>Stop Guessing Your Data. Start Scaling Your Ads.</h2>
@@ -197,7 +218,6 @@
         </div>
     </section>
 
-    <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
             <h3>What I Can Fix For You</h3>
@@ -214,40 +234,74 @@
         </div>
     </section>
 
-    <!-- Contact & Form Section -->
     <section id="contact" class="contact">
         <div class="container">
             <h3>Let's Connect Your Analytics</h3>
             <p>Fill out the form below, and I'll review your current website tracking setup free of charge.</p>
             
             <div class="form-wrapper">
-                <!-- Embedded Google Form targeted by global wrapper styling overrides -->
-                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScF3gK0Ft_tDLCF_rcZg5QM4iJqr60qbaXDAX8kVt6_Ov6-1g/viewform?embedded=true" height="920" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+                <form id="inquiryForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" name="name" placeholder="John Doe" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="website">Website URL</label>
+                        <input type="url" id="website" name="website" placeholder="https://mywebsite.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Project Details / Requirements</label>
+                        <textarea id="message" name="message" rows="4" placeholder="Tell me about your Google Ads or GA4 setup needs..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Submit Inquiry</button>
+                </form>
             </div>
         </div>
     </section>
+
     <script>
-      // Find your embedded form iframe
-      var iframe = document.querySelector('.form-wrapper iframe');
-      if (iframe) {
-        var isFirstLoad = true;
-        iframe.addEventListener('load', function() {
-          // The first load happens when the page opens. 
-          // The SECOND load only happens when they submit the form and the iframe refreshes!
-          if (!isFirstLoad) {
-             console.log("Form submitted successfully!");
-             
-             // OPTIONAL: If you want to force the parent window to change to your thank you page:
-             // window.location.href = "thank-you.html";
-             
-             // OR push an event to Google Tag Manager's dataLayer:
-             window.dataLayer = window.dataLayer || [];
-             window.dataLayer.push({ 'event': 'googleFormSubmitted' });
-          }
-          isFirstLoad = false;
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            submitBtn.textContent = 'Sending...';
+            submitBtn.disabled = true;
+
+            const formData = new FormData(this);
+            
+            // We route the data payload to a free Formspree backend container
+            fetch('https://formspree.io/f/xqakpndp', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Force dynamic redirect to your local success page route instantly!
+                    window.location.href = 'thank-you.html';
+                } else {
+                    alert('Oops! There was a problem submitting your form. Please try again.');
+                    submitBtn.textContent = 'Submit Inquiry';
+                    submitBtn.disabled = false;
+                }
+            })
+            .catch(error => {
+                alert('Network error. Please try again.');
+                submitBtn.textContent = 'Submit Inquiry';
+                submitBtn.disabled = false;
+            });
         });
-      }
     </script>
+
 </body>
 </html>
-
